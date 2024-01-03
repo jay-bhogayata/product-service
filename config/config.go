@@ -1,7 +1,7 @@
 package config
 
 import (
-	"log"
+	"log/slog"
 
 	"github.com/spf13/viper"
 )
@@ -28,7 +28,7 @@ func Init() error {
 		return err
 	}
 
-	log.Println("config loaded successfully...")
+	slog.Info("config loaded successfully...")
 
 	return nil
 }
