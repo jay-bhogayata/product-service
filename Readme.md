@@ -1,20 +1,47 @@
-# Product Service
+# 🚀 Product Service
 
-## Description
-This is a microservice for product service.
+Product Service is a robust microservice designed to manage products. It's built with Go and can be easily run with Make.
 
-## Requirements
+## 📚 Description
 
-- go 1.21
-- make 
+This service is part of a microservices architecture system. It's responsible for all operations related to products, such as creating, updating, deleting, and retrieving product data.
 
-## How to run
+## 🛠️ Requirements
+
+To run this service, you'll need:
+
+- [Go](https://golang.org/dl/) 1.21 or later
+- [Make](https://www.gnu.org/software/make/)
+
+## 🚀 Getting Started
+
+You can run the service in two ways:
+
+1. Using Make:
+
+    ```sh
+    make run
+    ```
+
+2. Directly with Go:
+
+    ```sh
+    go run main.go
+    ```
+
+## 📖 Documentation
+
+Once the service is running, you can access the API documentation at the following URL:
+
+[Swagger API Documentation](http://localhost:8080/swagger/index.html)
+
+## 💻 Local Development
+
+For local development, we recommend using [Air](https://github.com/cosmtrek/air) for hot reloading. This will automatically rebuild and restart your service whenever you make changes to the source code.
+
+To start the service with Air, run:
 
 ```sh
-make run
+air
 ```
-- or 
-
-```sh
-go run main.go
-```
+note : air does hot reload swagger docs, so you need to restart the service to see the changes.
