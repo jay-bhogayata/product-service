@@ -1,9 +1,11 @@
 package server
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/jay-bhogayata/product-service/config"
 	_ "github.com/jay-bhogayata/product-service/docs"
 	"github.com/jay-bhogayata/product-service/router"
 	"github.com/labstack/echo/v4"
@@ -19,7 +21,7 @@ import (
 // @host					localhost:8080
 // @BasePath				/api/v1
 // @schemes					http
-func Serve() error {
+func Serve(cfg config.Config) error {
 
 	e := echo.New()
 
@@ -28,11 +30,11 @@ func Serve() error {
 	router.SetRoutes(e)
 
 	s := http.Server{
-		Addr:    ":8080",
+		Addr:    fmt.Sprintf(":%d", cfg.Server.Port),
 		Handler: e,
 	}
 
-	log.Println("server is starting on port 8080")
+	log.Println("server is starting on port ", cfg.Server.Port)
 
 	err := s.ListenAndServe()
 	if err != nil {
