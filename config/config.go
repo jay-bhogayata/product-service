@@ -10,6 +10,14 @@ type Config struct {
 	Server struct {
 		Port int
 	}
+	Database struct {
+		Host     string
+		Port     string
+		User     string
+		Password string
+		DbName   string
+		Sslmode  string
+	}
 }
 
 var AppCfg Config

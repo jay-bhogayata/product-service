@@ -4,12 +4,19 @@ import (
 	"log/slog"
 
 	"github.com/jay-bhogayata/product-service/config"
+	"github.com/jay-bhogayata/product-service/db"
 	"github.com/jay-bhogayata/product-service/server"
 )
 
 func main() {
 
 	err := config.Init()
+	if err != nil {
+		slog.Error(err.Error())
+		panic(err)
+	}
+
+	_, err = db.InitDB()
 	if err != nil {
 		slog.Error(err.Error())
 		panic(err)
