@@ -1,21 +1,28 @@
 # 🚀 Product Service
 
-Product Service is a robust microservice designed to manage products. It's built with Go and can be easily run with Make.
+Welcome to Product Service, a robust and efficient microservice designed to manage products. Built with the power of Go.
+## 📘 Description
 
-## 📚 Description
+Product Service is the backbone of all operations related to products. It handles creating, updating, deleting, and retrieving product data, ensuring smooth and efficient product management.
 
-This service is part of a microservices architecture system. It's responsible for all operations related to products, such as creating, updating, deleting, and retrieving product data.
+## 🛠️ Prerequisites
 
-## 🛠️ Requirements
+Before you begin, ensure you have met the following requirements:
 
-To run this service, you'll need:
+- You have installed [Go](https://golang.org/dl/) 1.21 or later.
+- You have installed [Make](https://www.gnu.org/software/make/).
 
-- [Go](https://golang.org/dl/) 1.21 or later
-- [Make](https://www.gnu.org/software/make/)
+## ⚙️ Configuration
 
-## 🚀 Getting Started
+This service relies on a configuration file for operation. Follow these steps to set it up:
 
-You can run the service in two ways:
+1. Locate the `sample.config.yaml` file in the root directory of the project.
+2. Rename `sample.config.yaml` to `config.yaml`.
+3. Update the variables in `config.yaml` with your own values.
+
+## 🚀 Quickstart
+
+Kickstart the service in one of two ways:
 
 1. Using Make:
 
@@ -29,19 +36,18 @@ You can run the service in two ways:
     go run main.go
     ```
 
-## 📖 Documentation
+## 📖 API Documentation
 
-Once the service is running, you can access the API documentation at the following URL:
+Once the service is up and running, you can access the API documentation at:
 
 [Swagger API Documentation](http://localhost:8080/swagger/index.html)
 
 ## 💻 Local Development
 
-For local development, we recommend using [Air](https://github.com/cosmtrek/air) for hot reloading. This will automatically rebuild and restart your service whenever you make changes to the source code.
+For a seamless local development experience, we recommend using [Air](https://github.com/cosmtrek/air) for hot reloading. Air automatically rebuilds and restarts your service whenever you make changes to the source code.
 
 To start the service with Air, run:
 
 ```sh
 air
 ```
-note : air does hot reload swagger docs, so you need to restart the service to see the changes.
