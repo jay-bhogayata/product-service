@@ -2,7 +2,7 @@ package server
 
 import (
 	"fmt"
-	"log"
+	"log/slog"
 	"net/http"
 
 	"github.com/jay-bhogayata/product-service/config"
@@ -34,7 +34,7 @@ func Serve(cfg config.Config) error {
 		Handler: e,
 	}
 
-	log.Println("server is starting on port ", cfg.Server.Port)
+	slog.Info("server is starting on", "port", cfg.Server.Port)
 
 	err := s.ListenAndServe()
 	if err != nil {
