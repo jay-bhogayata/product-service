@@ -10,8 +10,12 @@ vet:
 	@echo "Running go vet"
 	go vet ./...
 
-.PHONY: build
-build: fmt vet
+.PHONY: docs
+docs:
+	swag init -g server/server.go
+
+.PHONY: build 
+build: fmt vet docs
 	@echo "Building product-service"
 	go build -o product-service .
 
