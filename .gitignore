@@ -28,3 +28,7 @@ config.yml
 # air
 .air.toml
 tmp
+
+# docker
+.dockerignore
+docker-compose.yaml
