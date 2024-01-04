@@ -13,6 +13,6 @@ func SetRoutes(e *echo.Echo) {
 	api.GET("/health", controllers.Health)
 
 	cc := controllers.NewCategoryControllers(config.AppCfg)
-
+	api.GET("/category", cc.GetAvailableCategories)
 	api.POST("/category", cc.CreateCategory)
 }

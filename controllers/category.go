@@ -70,3 +70,25 @@ func (c *CategoryControllers) CreateCategory(ctx echo.Context) error {
 	}
 	return ctx.JSON(http.StatusCreated, res)
 }
+
+// @Summary					Get available categories
+// @Description  			Get available categories
+// @Tags					category
+// @Accept					n/a
+// @Produce					json
+// @Success					200 {array} models.Category
+// @Failure					400 {object} errorResponse
+// @Router					/category [get]
+func (c *CategoryControllers) GetAvailableCategories(ctx echo.Context) error {
+
+	categories, err := models.GetAvailableCategories(c.db)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	return ctx.JSON(http.StatusOK, categories)
+}

@@ -30,6 +30,13 @@ definitions:
         example: true
         type: boolean
     type: object
+  models.Category:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
 host: localhost:8080
 info:
   contact:
@@ -41,6 +48,26 @@ info:
   version: 0.0.1
 paths:
   /category:
+    get:
+      consumes:
+      - n/a
+      description: Get available categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.errorResponse'
+      summary: Get available categories
+      tags:
+      - category
     post:
       consumes:
       - application/json

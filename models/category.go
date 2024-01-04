@@ -28,3 +28,14 @@ func CreateCategory(db *gorm.DB, name string) error {
 
 	return nil
 }
+
+func GetAvailableCategories(db *gorm.DB) ([]Category, error) {
+	var categories []Category
+
+	res := db.Find(&categories)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return categories, nil
+}
