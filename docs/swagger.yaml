@@ -1,9 +1,40 @@
 basePath: /api/v1
 definitions:
+  controllers.category:
+    properties:
+      name:
+        example: electronics
+        type: string
+    type: object
+  controllers.errorResponse:
+    properties:
+      message:
+        example: category already exists
+        type: string
+      success:
+        example: false
+        type: boolean
+    type: object
   controllers.healthResponse:
     properties:
       message:
         example: ok
+        type: string
+    type: object
+  controllers.successResponse:
+    properties:
+      message:
+        example: category created successfully
+        type: string
+      success:
+        example: true
+        type: boolean
+    type: object
+  models.Category:
+    properties:
+      id:
+        type: integer
+      name:
         type: string
     type: object
 host: localhost:8080
@@ -16,6 +47,52 @@ info:
   title: product-service API
   version: 0.0.1
 paths:
+  /category:
+    get:
+      consumes:
+      - n/a
+      description: Get available categories
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Category'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.errorResponse'
+      summary: Get available categories
+      tags:
+      - category
+    post:
+      consumes:
+      - application/json
+      description: Create category
+      parameters:
+      - description: category
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.category'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/controllers.successResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controllers.errorResponse'
+      summary: Create category
+      tags:
+      - category
   /health:
     get:
       description: Health check endpoint
