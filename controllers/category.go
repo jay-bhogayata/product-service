@@ -41,6 +41,8 @@ type errorResponse struct {
 // @Param					category body category true "category"
 // @Success					201 {object} successResponse
 // @Failure					400 {object} errorResponse
+// @Failure					500 {object} errorResponse
+// @Security				BearerToken
 // @Router					/category [post]
 func (c *CategoryControllers) CreateCategory(ctx echo.Context) error {
 
@@ -78,6 +80,8 @@ func (c *CategoryControllers) CreateCategory(ctx echo.Context) error {
 // @Produce					json
 // @Success					200 {array} models.Category
 // @Failure					400 {object} errorResponse
+// @Failure					500 {object} errorResponse
+// @Security				BearerToken
 // @Router					/category [get]
 func (c *CategoryControllers) GetAvailableCategories(ctx echo.Context) error {
 
