@@ -4,6 +4,7 @@ import (
 	"log/slog"
 
 	"github.com/spf13/viper"
+	"gorm.io/gorm"
 )
 
 type Config struct {
@@ -18,6 +19,7 @@ type Config struct {
 		DbName   string
 		Sslmode  string
 	}
+	Db *gorm.DB
 }
 
 var AppCfg Config

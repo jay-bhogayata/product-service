@@ -16,7 +16,7 @@ func main() {
 		panic(err)
 	}
 
-	_, err = db.InitDB()
+	err = db.InitDB(&config.AppCfg)
 	if err != nil {
 		slog.Error(err.Error())
 		panic(err)
