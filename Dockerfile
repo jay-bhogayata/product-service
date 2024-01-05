@@ -7,7 +7,7 @@ ENV GOCACHE=/root/.cache/go-build
 RUN --mount=type=cache,target="/root/.cache/go-build" CGO_ENABLED=0 GOOS=linux go build -o product-api 
 
 FROM alpine:3.14.2
-WORKDIR /
-COPY --from=builder /app/product-api /product-api
+WORKDIR /app
+COPY --from=builder /app/product-api /app/product-api
 EXPOSE 8080
 CMD [ "./product-api" ]
