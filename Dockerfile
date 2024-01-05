@@ -6,7 +6,7 @@ COPY . .
 ENV GOCACHE=/root/.cache/go-build
 RUN --mount=type=cache,target="/root/.cache/go-build" CGO_ENABLED=0 GOOS=linux go build -o product-api 
 
-FROM gcr.io/distroless/static-debian12
+FROM alpine:3.14.2
 WORKDIR /
 COPY --from=builder /app/product-api /product-api
 EXPOSE 8080
