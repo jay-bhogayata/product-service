@@ -4,10 +4,10 @@ COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 ENV GOCACHE=/root/.cache/go-build
-RUN --mount=type=cache,target="/root/.cache/go-build" CGO_ENABLED=0 GOOS=linux go build -o product-api 
+RUN --mount=type=cache,target="/root/.cache/go-build" CGO_ENABLED=0 GOOS=linux go build -o product-servive
 
 FROM alpine:3.14.2
-WORKDIR /app
-COPY --from=builder /app/product-api /app/product-api
+WORKDIR /
+COPY --from=builder /app/product-servive .   
 EXPOSE 8080
-CMD [ "/app/product-api" ]
+CMD ["./product-servive"]

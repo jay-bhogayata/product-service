@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  JWTSecret: "736rere53671574290351838469151412840233258575291466112frrf$%^&&FEFF5553914821"
+environment: dev
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: pg123
+  dbName: product
+  sslmode: disable
+# Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpheUBnbWFpbC5jb20iLCJpc3MiOiJBdXRoeCIsImV4cCI6MTcwNDYzNDg0OSwiaWF0IjoxNzA0Mzc1NjQ5fQ.lgI7gwlf8pRVy0emP58uKmpx0OkiKzPk4z3Hp1ITkWs
