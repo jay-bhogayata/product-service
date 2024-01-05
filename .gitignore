@@ -24,6 +24,8 @@ go.work
 .env
 config.yaml
 config.yml
+cfg.yaml
+cfg.yml
 
 # air
 .air.toml
