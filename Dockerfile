@@ -10,4 +10,4 @@ FROM alpine:3.14.2
 WORKDIR /app
 COPY --from=builder /app/product-api /app/product-api
 EXPOSE 8080
-CMD [ "./product-api" ]
+CMD [ "/app/product-api" ]
