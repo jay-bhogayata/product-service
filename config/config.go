@@ -9,7 +9,8 @@ import (
 
 type Config struct {
 	Server struct {
-		Port int
+		Port      int
+		JWTSecret string
 	}
 	Database struct {
 		Host     string

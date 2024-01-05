@@ -39,3 +39,34 @@ func GetAvailableCategories(db *gorm.DB) ([]Category, error) {
 
 	return categories, nil
 }
+
+func GetCategoryById(db *gorm.DB, id int64) (*Category, error) {
+	var category Category
+
+	res := db.First(&category, id)
+	if res.Error != nil {
+		return nil, res.Error
+	}
+
+	return &category, nil
+}
+
+func EditCategory(db *gorm.DB, id int64, name string) error {
+	category := Category{Name: name}
+
+	res := db.Model(&category).Where("id = ?", id).Updates(category)
+	if res.Error != nil {
+		return res.Error
+	}
+
+	return nil
+}
+
+func DeleteCategoryById(db *gorm.DB, id int64) error {
+	res := db.Delete(&Category{}, id)
+	if res.Error != nil {
+		return res.Error
+	}
+
+	return nil
+}

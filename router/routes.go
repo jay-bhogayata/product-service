@@ -15,4 +15,8 @@ func SetRoutes(e *echo.Echo) {
 	cc := controllers.NewCategoryControllers(config.AppCfg)
 	api.GET("/category", cc.GetAvailableCategories)
 	api.POST("/category", cc.CreateCategory)
+	api.GET("/category/:id", cc.GetCategoryById)
+	api.PUT("/category/:id", cc.EditCategory)
+	api.DELETE("/category/:id", cc.DeleteCategoryById)
+
 }

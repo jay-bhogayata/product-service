@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"strings"
 
 	"github.com/jay-bhogayata/product-service/config"
 	_ "github.com/jay-bhogayata/product-service/docs"
 	"github.com/jay-bhogayata/product-service/router"
+	echojwt "github.com/labstack/echo-jwt"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
@@ -21,10 +23,19 @@ import (
 // @host					localhost:8080
 // @BasePath				/api/v1
 // @schemes					http
+// @securityDefinitions.apiKey	BearerToken
+// @in							header
+// @name						Authorization
 func Serve(cfg config.Config) error {
 
 	e := echo.New()
 
+	e.Use(echojwt.WithConfig(
+		echojwt.Config{
+			Skipper:    pathSkipper,
+			SigningKey: []byte(cfg.Server.JWTSecret),
+		},
+	))
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	router.SetRoutes(e)
@@ -42,4 +53,14 @@ func Serve(cfg config.Config) error {
 	}
 
 	return nil
+}
+
+func pathSkipper(c echo.Context) bool {
+	paths := []string{"/swagger", "/api/v1/health"}
+	for _, path := range paths {
+		if strings.Contains(c.Path(), path) {
+			return true
+		}
+	}
+	return false
 }
