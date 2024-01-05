@@ -2,6 +2,7 @@ package config
 
 import (
 	"log/slog"
+	"os"
 
 	"github.com/spf13/viper"
 	"gorm.io/gorm"
@@ -39,6 +40,13 @@ func Init() error {
 	err = viper.Unmarshal(&AppCfg)
 	if err != nil {
 		return err
+	}
+
+	AppCfg.Server.JWTSecret = os.Getenv("JWT_SECRET")
+
+	if AppCfg.Server.JWTSecret == "" {
+		slog.Error("JWT_SECRET is not set")
+		panic("JWT_SECRET is not set")
 	}
 
 	slog.Info("config loaded successfully...")
