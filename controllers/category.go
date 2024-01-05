@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/jay-bhogayata/product-service/config"
 	"github.com/jay-bhogayata/product-service/models"
@@ -95,4 +96,129 @@ func (c *CategoryControllers) GetAvailableCategories(ctx echo.Context) error {
 	}
 
 	return ctx.JSON(http.StatusOK, categories)
+}
+
+// @Summary					Get category by id
+// @Description  			Get category by id
+// @Tags					category
+// @Accept					n/a
+// @Produce					json
+// @Param					id path int true "category id"
+// @Success					200 {object} models.Category
+// @Failure					400 {object} errorResponse
+// @Failure					500 {object} errorResponse
+// @Security				BearerToken
+// @Router					/category/{id} [get]
+func (c *CategoryControllers) GetCategoryById(ctx echo.Context) error {
+
+	id := ctx.Param("id")
+	categoryID, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	category, err := models.GetCategoryById(c.db, categoryID)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	return ctx.JSON(http.StatusOK, category)
+}
+
+// @Summary					Edit category
+// @Description  			Edit category
+// @Tags					category
+// @Accept					json
+// @Produce					json
+// @Param					id path int true "category id"
+// @Param					category body category true "category"
+// @Success					200 {object} successResponse
+// @Failure					400 {object} errorResponse
+// @Failure					500 {object} errorResponse
+// @Security				BearerToken
+// @Router					/category/{id} [put]
+func (c *CategoryControllers) EditCategory(ctx echo.Context) error {
+
+	id := ctx.Param("id")
+	categoryID, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	var cat category
+
+	err = ctx.Bind(&cat)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	err = models.EditCategory(c.db, categoryID, cat.Name)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	res := &successResponse{
+		Success: true,
+		Message: "category updated successfully",
+	}
+	return ctx.JSON(http.StatusOK, res)
+}
+
+// @Summary					Delete category
+// @Description  			Delete category
+// @Tags					category
+// @Accept					n/a
+// @Produce					json
+// @Param					id path int true "category id"
+// @Success					200 {object} successResponse
+// @Failure					400 {object} errorResponse
+// @Failure					500 {object} errorResponse
+// @Security				BearerToken
+// @Router					/category/{id} [delete]
+func (c *CategoryControllers) DeleteCategoryById(ctx echo.Context) error {
+
+	id := ctx.Param("id")
+	categoryID, err := strconv.ParseInt(id, 10, 64)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	err = models.DeleteCategoryById(c.db, categoryID)
+	if err != nil {
+		res := &errorResponse{
+			Success: false,
+			Message: err.Error(),
+		}
+		return ctx.JSON(http.StatusBadRequest, res)
+	}
+
+	res := &successResponse{
+		Success: true,
+		Message: "category deleted successfully",
+	}
+	return ctx.JSON(http.StatusOK, res)
 }
