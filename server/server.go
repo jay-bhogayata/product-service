@@ -11,6 +11,7 @@ import (
 	"github.com/jay-bhogayata/product-service/router"
 	echojwt "github.com/labstack/echo-jwt"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
@@ -22,14 +23,14 @@ import (
 // @contact.email			jaybhogayata53@gmail.com
 // @host					localhost:8080
 // @BasePath				/api/v1
-// @schemes					http
+// @schemes					http https
 // @securityDefinitions.apiKey	BearerToken
 // @in							header
 // @name						Authorization
 func Serve(cfg config.Config) error {
 
 	e := echo.New()
-
+	e.Use(middleware.CORS())
 	e.Use(echojwt.WithConfig(
 		echojwt.Config{
 			Skipper:    pathSkipper,
@@ -37,6 +38,7 @@ func Serve(cfg config.Config) error {
 		},
 	))
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
+	e.GET("/docs/*", echoSwagger.EchoWrapHandler(echoSwagger.InstanceName("private")))
 
 	router.SetRoutes(e)
 
@@ -56,7 +58,7 @@ func Serve(cfg config.Config) error {
 }
 
 func pathSkipper(c echo.Context) bool {
-	paths := []string{"/swagger", "/api/v1/health"}
+	paths := []string{"/swagger", "/docs", "/api/v1/health"}
 	for _, path := range paths {
 		if strings.Contains(c.Path(), path) {
 			return true

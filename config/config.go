@@ -21,7 +21,8 @@ type Config struct {
 		DbName   string
 		Sslmode  string
 	}
-	Db *gorm.DB
+	Db          *gorm.DB
+	Environment string
 }
 
 var AppCfg Config
