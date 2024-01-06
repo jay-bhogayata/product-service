@@ -13,7 +13,7 @@ vet:
 .PHONY: docs
 docs:
 	swag init -g server/server.go
-
+	
 .PHONY: build 
 build: fmt vet docs
 	@echo "Building product-service"

@@ -355,7 +355,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "0.0.1",
 	Host:             "localhost:8080",
 	BasePath:         "/api/v1",
-	Schemes:          []string{"http"},
+	Schemes:          []string{"http", "https"},
 	Title:            "product-service API",
 	Description:      "This is a sample server for product-service.",
 	InfoInstanceName: "swagger",

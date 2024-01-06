@@ -14,7 +14,7 @@
         },
         "version": "0.0.1"
     },
-    "host": "localhost:8080",
+    "host": "ecomm.jaybhogayata.me",
     "basePath": "/api/v1",
     "paths": {
         "/category": {
