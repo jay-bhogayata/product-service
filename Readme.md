@@ -1,3 +1,6 @@
+[![ci workflow](https://github.com/jay-bhogayata/product-service/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/jay-bhogayata/product-service/actions/workflows/ci.yaml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jay-bhogayata/product-service)](https://goreportcard.com/report/github.com/jay-bhogayata/product-service)
+
 # 🚀 Product Service
 
 Welcome to Product Service, a robust and efficient microservice designed to manage products. Built with the power of Go.
@@ -17,8 +20,8 @@ Before you begin, ensure you have met the following requirements:
 This service relies on a configuration file for operation. Follow these steps to set it up:
 
 1. Locate the `sample.config.yaml` file in the root directory of the project.
-2. Rename `sample.config.yaml` to `config.yaml`.
-3. Update the variables in `config.yaml` with your own values.
+2. Rename `sample.config.yaml` to `cfg.yaml`.
+3. Update the variables in `cfg.yaml` with your own values.
 
 ## 🚀 Quickstart
 
