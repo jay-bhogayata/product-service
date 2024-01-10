@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/jay-bhogayata/product-service/config"
 	_ "github.com/jay-bhogayata/product-service/docs"
@@ -67,8 +68,11 @@ func Serve(cfg config.Config) error {
 	router.SetRoutes(e)
 
 	s := http.Server{
-		Addr:    fmt.Sprintf(":%d", cfg.Server.Port),
-		Handler: e,
+		Addr:         fmt.Sprintf(":%d", cfg.Server.Port),
+		Handler:      e,
+		IdleTimeout:  time.Minute,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 30 * time.Second,
 	}
 
 	slog.Info("server is starting on", "port", cfg.Server.Port)
